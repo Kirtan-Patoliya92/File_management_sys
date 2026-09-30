@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirtan File Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">K</div>
+      <div>
+        <h1>File<span>Manager</span></h1>
+        <p>Local file workspace</p>
+      </div>
+    </div>
+    <button class="primary-btn" onclick="openCreateModal()">＋ New File</button>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">FILE MANAGEMENT PROJECT</p>
+        <h2>Manage your files <span>beautifully.</span></h2>
+        <p class="hero-text">Create, inspect, rewrite, download and delete files from one clean dashboard.</p>
+      </div>
+      <div class="stats-card">
+        <div class="stat-icon">▣</div>
+        <div>
+          <strong id="fileCount">0</strong>
+          <small>Files</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="search">
+        <span>⌕</span>
+        <input id="searchInput" type="search" placeholder="Search files..." oninput="renderFiles()">
+      </div>
+      <button class="secondary-btn" onclick="loadFiles()">↻ Refresh</button>
+    </section>
+
+    <section class="file-panel">
+      <div class="panel-heading">
+        <div>
+          <h3>Your files</h3>
+          <p>Stored inside <code>managed_files/</code></p>
+        </div>
+      </div>
+      <div id="fileList" class="file-list"></div>
+    </section>
+  </main>
+
+  <div id="modalBackdrop" class="modal-backdrop hidden">
+    <div class="modal">
+      <button class="close-btn" onclick="closeModal()">×</button>
+      <div class="modal-icon">✦</div>
+      <h3 id="modalTitle">Create new file</h3>
+      <p id="modalSubtitle">Give your file a name and add its content.</p>
+
+      <label>File name</label>
+      <input id="fileName" class="field" placeholder="example.txt">
+
+      <label>Content</label>
+      <textarea id="fileContent" class="field editor" placeholder="Write something..."></textarea>
+
+      <div class="modal-actions">
+        <button class="secondary-btn" onclick="closeModal()">Cancel</button>
+        <button id="saveBtn" class="primary-btn" onclick="saveFile()">Create File</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
